@@ -118,7 +118,7 @@ namespace EF_School_DB_Managment
                 //исходя из роли - входим в своё место
                 switch (authUserRole)
                 {
-                    case "Ученик":
+                    case "Student":
                         //получаем авториз-го ученика и переходим в его форму
                         var student = await manager.GetStudentAsync(login_log.Text);
                         StudentPage spage = new StudentPage(student);
@@ -126,7 +126,7 @@ namespace EF_School_DB_Managment
                         Hide(); //скрываем эту форму
                         break;
 
-                    case "Учитель":
+                    case "Teacher":
                         //получаем авториз-го учителя и переходим в его форму
                         var teacher = await manager.GetTeacherAsync(login_log.Text);
                         TeacherPage tpage = new TeacherPage(teacher);
@@ -134,7 +134,7 @@ namespace EF_School_DB_Managment
                         Hide(); //скрываем эту форму
                         break;
 
-                    case "Админ":
+                    case "Admin":
                         //получаем авториз-го админа и переходим в его форму
                         var admin = await manager.GetAdminAsync(login_log.Text);
                         AdminPage apage = new AdminPage(admin);
@@ -227,8 +227,6 @@ namespace EF_School_DB_Managment
 
         private async void HomePage_Load(object sender, EventArgs e)
         {
-            using var context = new SchoolDbContext();
-            var t = context.Lessons.FirstOrDefault(x => x.Comment == "d");
             var d = await manager.GetTeacherAllAsync("");
             var s = await manager.GetStudentAllAsync("");
         }

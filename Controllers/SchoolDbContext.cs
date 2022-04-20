@@ -14,6 +14,7 @@ namespace EF_School_DB_Managment.Controllers
         //связанные таблицы в БД
         public DbSet<Class> Classes { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
         public DbSet<TimeTable> TimeTables { get; set; }
 
         //настройки приложения (строка подключения в д.случае)
@@ -33,6 +34,7 @@ namespace EF_School_DB_Managment.Controllers
             builder.ApplyConfiguration(new BaseTeacherConfiguration());
             builder.ApplyConfiguration(new TimeTableConfiguration());
             builder.ApplyConfiguration(new LessonConfiguration());
+            builder.ApplyConfiguration(new RatingConfiguration());
         }
 
         //настройки модели Student в отдельном классе
@@ -54,13 +56,7 @@ namespace EF_School_DB_Managment.Controllers
                     .HasOne(x => x.Class)
                     .WithMany(x => x.Students)
                     .HasForeignKey(x => x.ClassId) 
-                    .OnDelete(DeleteBehavior.Restrict);
-
-                builder //связь 1 к многим (оценки к ученику)
-                     .HasMany(x => x.Lessons)
-                     .WithOne(x => x.Student)
-                     .HasForeignKey(x => x.StudentId)
-                     .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.SetNull);
             }
         }
 
@@ -94,6 +90,12 @@ namespace EF_School_DB_Managment.Controllers
 
                 builder //связь 1 к многим (у класса список расписание)
                     .HasMany(x => x.TimeTable)
+                    .WithOne(x => x.Class)
+                    .HasForeignKey(x => x.ClassId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                builder //связь 1 к многим (оценки к ученику)
+                    .HasMany(x => x.Lessons)
                     .WithOne(x => x.Class)
                     .HasForeignKey(x => x.ClassId)
                     .OnDelete(DeleteBehavior.Cascade);
@@ -131,6 +133,25 @@ namespace EF_School_DB_Managment.Controllers
                 //макс.длина + знач. по умолчанию
                 builder.Property(x => x.Subject).HasMaxLength(25).HasDefaultValue("");
                 builder.Property(x => x.HomeWork).HasMaxLength(200).HasDefaultValue("");
+                //тип только дата
+                builder.Property(x => x.Date).HasColumnType("date");
+            }
+        }
+
+        //настройки модели Rating в отдельном классе
+        public class RatingConfiguration : IEntityTypeConfiguration<Rating>
+        {
+            //настройки модели с пом-ю FluentApi
+            public void Configure(EntityTypeBuilder<Rating> builder)
+            {
+                //макс.длина + знач. по умолчанию
+                builder.Property(x => x.Subject).HasMaxLength(25).HasDefaultValue("");
+                builder.Property(x => x.Comment).HasMaxLength(200).HasDefaultValue("");
+                builder.Property(x => x.Rate).HasMaxLength(13).HasDefaultValue(0);
+                //тип только дата
+                builder.Property(x => x.Date).HasColumnType("date");
+                //тип только дата
+                builder.Property(x => x.Date).HasColumnType("date");
             }
         }
 

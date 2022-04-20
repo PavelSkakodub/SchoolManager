@@ -18,6 +18,9 @@ namespace EF_School_DB_Managment.Models
         //связь 1 ко многим (ученикам)
         public List<Student> Students { get; set; }
 
+        //связь 1 ко многим (урокам)
+        public List<Lesson> Lessons { get; set; }
+
         //связь 1 к многим (расписанию)
         public List<TimeTable> TimeTable { get; set; }
     }
@@ -28,12 +31,23 @@ namespace EF_School_DB_Managment.Models
         public int Id { get; set; } //айди
         public string Subject { get; set; } //предмет
         public DateTime Date{ get; set; } //дата урока
-        public sbyte Rate { get; set; } //оценка
-        public string Comment { get; set; } //комментарий
         public string HomeWork { get; set; } //ДЗ
 
-        //связь 1 к многим (студенту)
-        public int StudentId { get; set; }
+        //связь 1 к многим (классу)
+        public int? ClassId { get; set; }
+        public Class Class { get; set; }
+    }
+
+    public class Rating
+    {
+        public int Id { get; set; } //айди
+        public string Subject { get; set; } //предмет
+        public DateTime Date { get; set; } //дата урока
+        public sbyte Rate { get; set; } //оценка
+        public string Comment { get; set; } //комментарий
+
+        //связь 1 к многим (ученику)
+        public int? StudentId { get; set; }
         public Student Student { get; set; }
     }
 

@@ -28,12 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TimeTablePage = new System.Windows.Forms.TabPage();
             this.OpenTimeTable = new System.Windows.Forms.Button();
             this.timeTableClass = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CreateLesson = new System.Windows.Forms.Button();
+            this.homework = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.classLesson = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.dateLesson = new System.Windows.Forms.DateTimePicker();
+            this.label19 = new System.Windows.Forms.Label();
             this.comment = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.classRate = new System.Windows.Forms.TextBox();
@@ -98,14 +106,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.MainControl = new System.Windows.Forms.TabControl();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.dateLesson = new System.Windows.Forms.DateTimePicker();
-            this.label28 = new System.Windows.Forms.Label();
-            this.classLesson = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.homework = new System.Windows.Forms.TextBox();
-            this.CreateLesson = new System.Windows.Forms.Button();
             this.TimeTablePage.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rate)).BeginInit();
@@ -180,6 +180,89 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(786, 122);
             this.panel1.TabIndex = 13;
+            // 
+            // CreateLesson
+            // 
+            this.CreateLesson.BackColor = System.Drawing.Color.GreenYellow;
+            this.CreateLesson.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CreateLesson.Location = new System.Drawing.Point(5, 92);
+            this.CreateLesson.Name = "CreateLesson";
+            this.CreateLesson.Size = new System.Drawing.Size(197, 27);
+            this.CreateLesson.TabIndex = 31;
+            this.CreateLesson.Text = "Создать урок";
+            this.CreateLesson.UseVisualStyleBackColor = false;
+            this.CreateLesson.Click += new System.EventHandler(this.CreateLesson_Click);
+            // 
+            // homework
+            // 
+            this.homework.Location = new System.Drawing.Point(208, 66);
+            this.homework.Name = "homework";
+            this.homework.PlaceholderText = "ДЗ для всего класса";
+            this.homework.Size = new System.Drawing.Size(173, 23);
+            this.homework.TabIndex = 30;
+            this.homework.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label29
+            // 
+            this.label29.BackColor = System.Drawing.Color.Khaki;
+            this.label29.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label29.Location = new System.Drawing.Point(208, 37);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(173, 23);
+            this.label29.TabIndex = 29;
+            this.label29.Text = "Домашнее задание";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // classLesson
+            // 
+            this.classLesson.Location = new System.Drawing.Point(127, 66);
+            this.classLesson.Name = "classLesson";
+            this.classLesson.PlaceholderText = "Класс";
+            this.classLesson.Size = new System.Drawing.Size(75, 23);
+            this.classLesson.TabIndex = 28;
+            this.classLesson.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label28
+            // 
+            this.label28.BackColor = System.Drawing.Color.Khaki;
+            this.label28.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label28.Location = new System.Drawing.Point(127, 37);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(75, 23);
+            this.label28.TabIndex = 27;
+            this.label28.Text = "Класс";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label27
+            // 
+            this.label27.BackColor = System.Drawing.Color.Khaki;
+            this.label27.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label27.Location = new System.Drawing.Point(5, 37);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(116, 23);
+            this.label27.TabIndex = 26;
+            this.label27.Text = "Дата урока";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dateLesson
+            // 
+            this.dateLesson.Location = new System.Drawing.Point(5, 66);
+            this.dateLesson.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
+            this.dateLesson.MinDate = new System.DateTime(2022, 4, 19, 0, 0, 0, 0);
+            this.dateLesson.Name = "dateLesson";
+            this.dateLesson.Size = new System.Drawing.Size(116, 23);
+            this.dateLesson.TabIndex = 25;
+            // 
+            // label19
+            // 
+            this.label19.BackColor = System.Drawing.Color.LightSalmon;
+            this.label19.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(5, 9);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(376, 23);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "Добавление урока";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comment
             // 
@@ -349,14 +432,14 @@
             this.timeTable.AllowUserToResizeRows = false;
             this.timeTable.BackgroundColor = System.Drawing.Color.Moccasin;
             this.timeTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.timeTable.ColumnHeadersHeight = 32;
             this.timeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.timeTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -369,14 +452,14 @@
             this.Thursday,
             this.Friday,
             this.Saturday});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.NavajoWhite;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gold;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.timeTable.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.NavajoWhite;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gold;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.timeTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.timeTable.EnableHeadersVisualStyles = false;
             this.timeTable.Location = new System.Drawing.Point(3, 37);
             this.timeTable.Name = "timeTable";
@@ -921,89 +1004,6 @@
             this.MainControl.SelectedIndex = 0;
             this.MainControl.Size = new System.Drawing.Size(800, 450);
             this.MainControl.TabIndex = 1;
-            // 
-            // label19
-            // 
-            this.label19.BackColor = System.Drawing.Color.LightSalmon;
-            this.label19.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label19.Location = new System.Drawing.Point(5, 9);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(376, 23);
-            this.label19.TabIndex = 24;
-            this.label19.Text = "Добавление урока";
-            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label27
-            // 
-            this.label27.BackColor = System.Drawing.Color.Khaki;
-            this.label27.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label27.Location = new System.Drawing.Point(5, 37);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(116, 23);
-            this.label27.TabIndex = 26;
-            this.label27.Text = "Дата урока";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dateLesson
-            // 
-            this.dateLesson.Location = new System.Drawing.Point(5, 66);
-            this.dateLesson.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
-            this.dateLesson.MinDate = new System.DateTime(2022, 4, 19, 0, 0, 0, 0);
-            this.dateLesson.Name = "dateLesson";
-            this.dateLesson.Size = new System.Drawing.Size(116, 23);
-            this.dateLesson.TabIndex = 25;
-            // 
-            // label28
-            // 
-            this.label28.BackColor = System.Drawing.Color.Khaki;
-            this.label28.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label28.Location = new System.Drawing.Point(127, 37);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(75, 23);
-            this.label28.TabIndex = 27;
-            this.label28.Text = "Класс";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // classLesson
-            // 
-            this.classLesson.Location = new System.Drawing.Point(127, 66);
-            this.classLesson.Name = "classLesson";
-            this.classLesson.PlaceholderText = "Класс";
-            this.classLesson.Size = new System.Drawing.Size(75, 23);
-            this.classLesson.TabIndex = 28;
-            this.classLesson.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label29
-            // 
-            this.label29.BackColor = System.Drawing.Color.Khaki;
-            this.label29.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label29.Location = new System.Drawing.Point(208, 37);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(173, 23);
-            this.label29.TabIndex = 29;
-            this.label29.Text = "Домашнее задание";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // homework
-            // 
-            this.homework.Location = new System.Drawing.Point(208, 66);
-            this.homework.Name = "homework";
-            this.homework.PlaceholderText = "ДЗ для всего класса";
-            this.homework.Size = new System.Drawing.Size(173, 23);
-            this.homework.TabIndex = 30;
-            this.homework.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // CreateLesson
-            // 
-            this.CreateLesson.BackColor = System.Drawing.Color.GreenYellow;
-            this.CreateLesson.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CreateLesson.Location = new System.Drawing.Point(5, 92);
-            this.CreateLesson.Name = "CreateLesson";
-            this.CreateLesson.Size = new System.Drawing.Size(197, 27);
-            this.CreateLesson.TabIndex = 31;
-            this.CreateLesson.Text = "Создать урок";
-            this.CreateLesson.UseVisualStyleBackColor = false;
-            this.CreateLesson.Click += new System.EventHandler(this.CreateLesson_Click);
             // 
             // TeacherPage
             // 

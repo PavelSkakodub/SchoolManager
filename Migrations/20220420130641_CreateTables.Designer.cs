@@ -4,14 +4,16 @@ using EF_School_DB_Managment.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EF_School_DB_Managment.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220420130641_CreateTables")]
+    partial class CreateTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,6 +213,12 @@ namespace EF_School_DB_Managment.Migrations
                     b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Comment")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasDefaultValue("");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
@@ -219,6 +227,9 @@ namespace EF_School_DB_Managment.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasDefaultValue("");
+
+                    b.Property<short>("Rate")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Subject")
                         .ValueGeneratedOnAdd()
@@ -231,44 +242,6 @@ namespace EF_School_DB_Managment.Migrations
                     b.HasIndex("ClassId");
 
                     b.ToTable("Lessons");
-                });
-
-            modelBuilder.Entity("EF_School_DB_Managment.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Comment")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
-                        .HasDefaultValue("");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("date");
-
-                    b.Property<short>("Rate")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(13)
-                        .HasColumnType("smallint")
-                        .HasDefaultValue((short)0);
-
-                    b.Property<int?>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subject")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)")
-                        .HasDefaultValue("");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("EF_School_DB_Managment.Models.Student", b =>
@@ -409,7 +382,7 @@ namespace EF_School_DB_Managment.Migrations
                     b.Property<DateTime>("BeginTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 4, 20, 18, 33, 3, 385, DateTimeKind.Local).AddTicks(6113));
+                        .HasDefaultValue(new DateTime(2022, 4, 20, 16, 6, 40, 649, DateTimeKind.Local).AddTicks(2349));
 
                     b.Property<int?>("ClassId")
                         .HasColumnType("int");
@@ -423,7 +396,7 @@ namespace EF_School_DB_Managment.Migrations
                     b.Property<DateTime>("EndTime")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 4, 20, 19, 18, 3, 391, DateTimeKind.Local).AddTicks(1439));
+                        .HasDefaultValue(new DateTime(2022, 4, 20, 16, 51, 40, 663, DateTimeKind.Local).AddTicks(1363));
 
                     b.Property<short>("NumberLesson")
                         .ValueGeneratedOnAdd()
@@ -481,15 +454,6 @@ namespace EF_School_DB_Managment.Migrations
                     b.Navigation("Class");
                 });
 
-            modelBuilder.Entity("EF_School_DB_Managment.Models.Rating", b =>
-                {
-                    b.HasOne("EF_School_DB_Managment.Models.Student", "Student")
-                        .WithMany("Ratings")
-                        .HasForeignKey("StudentId");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("EF_School_DB_Managment.Models.Student", b =>
                 {
                     b.HasOne("EF_School_DB_Managment.Models.Class", "Class")
@@ -541,8 +505,6 @@ namespace EF_School_DB_Managment.Migrations
             modelBuilder.Entity("EF_School_DB_Managment.Models.Student", b =>
                 {
                     b.Navigation("BaseStudent");
-
-                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("EF_School_DB_Managment.Models.Teacher", b =>

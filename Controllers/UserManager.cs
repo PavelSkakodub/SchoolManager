@@ -60,9 +60,9 @@ namespace EF_School_DB_Managment.Controllers
             //получаем юзера
             var user = (User)await GetUserByEmailAsync(email);
 
-            //проверяем хеш юзера и возвращаем роль юзера - иначе нулл
+            //проверяем хеш юзера и возвращаем роль юзера (название класса) - иначе нулл
             if (user != null && Helper.VerifyHashedPassword(user.HashPassword, password))
-                return user.Role;
+                return user.GetType().Name;
             else
                 return null;
         }
@@ -91,7 +91,7 @@ namespace EF_School_DB_Managment.Controllers
                 .Include(x => x.BaseStudent)
                 .Include(x => x.Class)
                 .Include(x => x.Class.TimeTable)
-                .Include(x => x.Lessons)
+                .Include(x => x.Class.Lessons)
                 .FirstOrDefaultAsync(x => x.Email == email);
             //возвращаем юзера
             return user;
@@ -201,14 +201,14 @@ namespace EF_School_DB_Managment.Controllers
         }
         
         //добавление оценки ученику
-        public async Task SetRateStudentAsync(string email, Lesson lesson)
+        public async Task SetRateStudentAsync(string email, Rating rate)
         {
             //используем контекст БД
             using var context = new SchoolDbContext();
             //получаем ученика с оценками
-            var student = await context.Students.Include(x => x.Lessons).FirstOrDefaultAsync(x => x.Email == email);
+            var student = await context.Students.Include(x => x.Ratings).FirstOrDefaultAsync(x => x.Email == email);
             //добавляем оценку
-            student.Lessons.Add(lesson);
+            student.Ratings.Add(rate);
             //сохраняем изменения
             await context.SaveChangesAsync();
         }
@@ -219,31 +219,36 @@ namespace EF_School_DB_Managment.Controllers
             //используем контекст БД
             using var context = new SchoolDbContext();
             //получаем учеников из класса
-            var students = await context.Students.Include(x => x.Lessons).Where(x => x.ClassId == id).ToListAsync(); ;
+            var students = await context.Students.Include(x => x.Ratings).Where(x => x.ClassId == id).ToListAsync(); ;
             //добавляем всем оценку новую
-            foreach (var s in students) s.Lessons.Add(new Lesson()
+            foreach (var s in students) s.Ratings.Add(new Rating()
             {
                 Subject = subject,
-                Rate =rate,
+                Rate = rate,
                 Comment = comment,
                 Date = date,
-                
-            });            
+            });
             //сохраняем изменения
             await context.SaveChangesAsync();
         }
 
         //создание урока
-        public async Task CreateLessonAsync(int id, Lesson lesson)
+        public async Task<bool> CreateLessonAsync(string name, Lesson lesson)
         {
             //используем контекст БД
             using var context = new SchoolDbContext();
             //получаем учеников из класса с связ-ми данными
-            var students = await context.Students.Include(x => x.Lessons).Where(x => x.ClassId == id).ToListAsync();
-            //добавляем урок
-            foreach(var s in students) s.Lessons.Add(lesson);
-            //сохраняем изменения
-            await context.SaveChangesAsync();
+            var @class = await context.Classes.Include(x => x.Lessons).Where(x => x.Name == name).FirstOrDefaultAsync();
+            //проверяем что нет одинаковых уроков (раз.предметы можно)
+            if (@class.Lessons.Where(x => x.Subject == lesson.Subject).FirstOrDefault(x => x.Date.Date == lesson.Date.Date) != null) return false; 
+            else
+            {
+                //добавляем урок
+                @class.Lessons.Add(lesson);
+                //сохраняем изменения
+                await context.SaveChangesAsync();
+                return true;
+            }
         }
 
         //получение списка учителей

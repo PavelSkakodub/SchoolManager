@@ -16,8 +16,8 @@ namespace EF_School_DB_Managment.Models
         public int? ClassId { get; set; }
         public Class Class { get; set; }
 
-        //связь 1 ко многим (урокам)
-        public List<Lesson> Lessons { get; set; }
+        //связь 1 к многим (оценкам)
+        public List<Rating> Ratings { get; set; }   
     }
 
     //дополнительная инфа по студенту

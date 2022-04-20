@@ -121,15 +121,15 @@ namespace EF_School_DB_Managment.Views
         private async void AddRateStudent_Click(object sender, EventArgs e)
         {
             //проверка введенных данных
-            if (dateWork.Value.Year <= DateTime.Now.Year && dateWork.Value.Month <= DateTime.Today.Month && emailStudent.Text.Trim().Length != 0)
+            if (dateWork.Value.Date <= DateTime.Now && emailStudent.Text.Trim().Length != 0)
             {
                 //получаем ученика по емейлу
                 var student = await manager.GetStudentAsync(emailStudent.Text);
-                //проверка на сущ-и учителя
+                //проверка на сущ-и ученика
                 if (student != null) 
                 {
                     //добавляем оценку с предметом тек.учителя
-                    await manager.SetRateStudentAsync(student.Email, new Lesson()
+                    await manager.SetRateStudentAsync(student.Email, new Rating()
                     {
                         Subject = User.BaseTeacher.Subject,
                         Rate = (sbyte)rate.Value, 
@@ -140,7 +140,7 @@ namespace EF_School_DB_Managment.Views
                 }
                 else MessageBox.Show("Такого ученика не существует", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else MessageBox.Show("Данные введены некорректно, проверьте дату и емейл студента", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else MessageBox.Show("Данные введены некорректно, дата не должна быть больше сег. дня", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //выставление оценки всему классу
@@ -156,13 +156,11 @@ namespace EF_School_DB_Managment.Views
                 {
                     //добавляем оценку с предметом тек.учителя
                     await manager.SetRateClassAsync(@class.Id, User.BaseTeacher.Subject, (sbyte)rate.Value, dateWork.Value, comment.Text);
-
-
                     MessageBox.Show("Оценка всем ученикам успешно выставлена", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                else MessageBox.Show("Такого класса не существует", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else MessageBox.Show("Данные введены некорректно, проверьте дату и название класса", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else MessageBox.Show("Данные введены некорректно, дата не должна быть больше сег. дня", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //открытие расписания классов
@@ -182,19 +180,31 @@ namespace EF_School_DB_Managment.Views
         //создаём урок
         private async void CreateLesson_Click(object sender, EventArgs e)
         {
+            //проверка ввода
             if (classLesson.Text.Trim().Length != 0 && homework.Text.Trim().Length != 0)
             {
-                var @class = await manager.GetClassAsync(classLesson.Text);
-                if (@class != null)
+                //урок должен быть раньше тек.даты
+                if (dateLesson.Value <= DateTime.Now)
                 {
-                    await manager.CreateLessonAsync(@class.Id, new Lesson()
+                    //получаем класс по названию
+                    var @class = await manager.GetClassAsync(classLesson.Text);
+                    //если класс сущ-ует
+                    if (@class != null)
                     {
-                        Subject = User.BaseTeacher.Subject,
-                        Date = dateLesson.Value,
-                        HomeWork = homework.Text
-                    });
+                        //создаём урок
+                        if (await manager.CreateLessonAsync(@class.Name, new Lesson()
+                        {
+                            Subject = User.BaseTeacher.Subject,
+                            Date = dateLesson.Value,
+                            HomeWork = homework.Text
+                        })) MessageBox.Show("Урок успешно добавлен", "Создание урока", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else MessageBox.Show("Такой урок уже существует", "Создание урока", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else MessageBox.Show("Такого класса не существует", "Создание урока", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else MessageBox.Show("Дата урока может быть сегодняшней или ранее", "Создание урока", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else MessageBox.Show("Заполните все поля корректно", "Создание урока", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
