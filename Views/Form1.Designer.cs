@@ -113,7 +113,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label3);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Size = new System.Drawing.Size(597, 340);
-            this.splitContainer1.SplitterDistance = 224;
+            this.splitContainer1.SplitterDistance = 223;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -156,7 +156,7 @@
             this.login_log.Name = "login_log";
             this.login_log.Size = new System.Drawing.Size(110, 23);
             this.login_log.TabIndex = 15;
-            this.login_log.Text = "alex.johns.2000@mail.ru";
+            this.login_log.Text = "student@mail.ru";
             this.login_log.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8

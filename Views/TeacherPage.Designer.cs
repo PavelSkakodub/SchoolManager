@@ -187,9 +187,9 @@
             this.CreateLesson.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.CreateLesson.Location = new System.Drawing.Point(5, 92);
             this.CreateLesson.Name = "CreateLesson";
-            this.CreateLesson.Size = new System.Drawing.Size(197, 27);
+            this.CreateLesson.Size = new System.Drawing.Size(376, 27);
             this.CreateLesson.TabIndex = 31;
-            this.CreateLesson.Text = "Создать урок";
+            this.CreateLesson.Text = "Добавить урок";
             this.CreateLesson.UseVisualStyleBackColor = false;
             this.CreateLesson.Click += new System.EventHandler(this.CreateLesson_Click);
             // 

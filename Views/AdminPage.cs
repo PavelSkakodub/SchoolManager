@@ -119,6 +119,22 @@ namespace EF_School_DB_Managment.Views
             //экспорт и открытие эксель файла
             Admin.ExportStudentsExcel(students);
         }
+
+        //экспорт оценок в эксель
+        private async void ExportRatingToExcel_Click(object sender, EventArgs e)
+        {
+            if (emailRating.Text.Trim().Length != 0)
+            {
+                //ищем ученика по емейлу
+                var student = await manager.GetStudentAsync(emailRating.Text);
+                //проверка на сущ-ие ученика
+                if (student != null)
+                {
+                    manager.ExportRatingToExcelAsync(student.Id, BeginOrderRating.Value, DateTime.Now.Date);
+                }
+                else MessageBox.Show("Такого ученика не существует", "Выгрузка успеваемости", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
         #region Сведения по учителям

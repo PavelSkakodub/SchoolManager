@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainControl = new System.Windows.Forms.TabControl();
             this.Profile = new System.Windows.Forms.TabPage();
             this.update = new System.Windows.Forms.Button();
@@ -67,6 +70,25 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.TimeTablePage = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.ExportRatingToExcel = new System.Windows.Forms.Button();
+            this.Average = new System.Windows.Forms.Button();
+            this.SubjectAverage = new System.Windows.Forms.TextBox();
+            this.EndOrderRating = new System.Windows.Forms.DateTimePicker();
+            this.BeginOrderRating = new System.Windows.Forms.DateTimePicker();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.LessonRatingTable = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OpenRatingLesson = new System.Windows.Forms.Button();
+            this.label27 = new System.Windows.Forms.Label();
+            this.dateLesson = new System.Windows.Forms.DateTimePicker();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.timeTable = new System.Windows.Forms.DataGridView();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,12 +100,13 @@
             this.Thursday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Friday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saturday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.MainControl.SuspendLayout();
             this.Profile.SuspendLayout();
             this.baseInfo.SuspendLayout();
             this.FirstInfo.SuspendLayout();
             this.TimeTablePage.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LessonRatingTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +114,6 @@
             // 
             this.MainControl.Controls.Add(this.Profile);
             this.MainControl.Controls.Add(this.TimeTablePage);
-            this.MainControl.Controls.Add(this.tabPage1);
             this.MainControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainControl.Location = new System.Drawing.Point(0, 0);
             this.MainControl.Name = "MainControl";
@@ -521,6 +543,8 @@
             // TimeTablePage
             // 
             this.TimeTablePage.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.TimeTablePage.Controls.Add(this.panel1);
+            this.TimeTablePage.Controls.Add(this.label17);
             this.TimeTablePage.Controls.Add(this.label20);
             this.TimeTablePage.Controls.Add(this.timeTable);
             this.TimeTablePage.Location = new System.Drawing.Point(4, 24);
@@ -528,15 +552,250 @@
             this.TimeTablePage.Padding = new System.Windows.Forms.Padding(3);
             this.TimeTablePage.Size = new System.Drawing.Size(792, 422);
             this.TimeTablePage.TabIndex = 1;
-            this.TimeTablePage.Text = "Расписание";
+            this.TimeTablePage.Text = "Расписание и уроки";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel1.Controls.Add(this.ExportRatingToExcel);
+            this.panel1.Controls.Add(this.Average);
+            this.panel1.Controls.Add(this.SubjectAverage);
+            this.panel1.Controls.Add(this.EndOrderRating);
+            this.panel1.Controls.Add(this.BeginOrderRating);
+            this.panel1.Controls.Add(this.label22);
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.label18);
+            this.panel1.Controls.Add(this.LessonRatingTable);
+            this.panel1.Controls.Add(this.OpenRatingLesson);
+            this.panel1.Controls.Add(this.label27);
+            this.panel1.Controls.Add(this.dateLesson);
+            this.panel1.Controls.Add(this.label19);
+            this.panel1.Location = new System.Drawing.Point(6, 282);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(780, 134);
+            this.panel1.TabIndex = 11;
+            // 
+            // ExportRatingToExcel
+            // 
+            this.ExportRatingToExcel.BackColor = System.Drawing.Color.LightGreen;
+            this.ExportRatingToExcel.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ExportRatingToExcel.Location = new System.Drawing.Point(605, 95);
+            this.ExportRatingToExcel.Name = "ExportRatingToExcel";
+            this.ExportRatingToExcel.Size = new System.Drawing.Size(172, 27);
+            this.ExportRatingToExcel.TabIndex = 41;
+            this.ExportRatingToExcel.Text = "Выгрузить в Excel";
+            this.ExportRatingToExcel.UseVisualStyleBackColor = false;
+            this.ExportRatingToExcel.Click += new System.EventHandler(this.ExportRatingToExcel_Click);
+            // 
+            // Average
+            // 
+            this.Average.BackColor = System.Drawing.Color.GreenYellow;
+            this.Average.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Average.Location = new System.Drawing.Point(451, 95);
+            this.Average.Name = "Average";
+            this.Average.Size = new System.Drawing.Size(148, 27);
+            this.Average.TabIndex = 40;
+            this.Average.Text = "Среднее значение";
+            this.Average.UseVisualStyleBackColor = false;
+            this.Average.Click += new System.EventHandler(this.Average_Click);
+            // 
+            // SubjectAverage
+            // 
+            this.SubjectAverage.Location = new System.Drawing.Point(451, 66);
+            this.SubjectAverage.Name = "SubjectAverage";
+            this.SubjectAverage.PlaceholderText = "Предмет";
+            this.SubjectAverage.Size = new System.Drawing.Size(85, 23);
+            this.SubjectAverage.TabIndex = 39;
+            this.SubjectAverage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // EndOrderRating
+            // 
+            this.EndOrderRating.Location = new System.Drawing.Point(663, 66);
+            this.EndOrderRating.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            this.EndOrderRating.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
+            this.EndOrderRating.Name = "EndOrderRating";
+            this.EndOrderRating.Size = new System.Drawing.Size(114, 23);
+            this.EndOrderRating.TabIndex = 38;
+            this.EndOrderRating.Value = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            // 
+            // BeginOrderRating
+            // 
+            this.BeginOrderRating.Location = new System.Drawing.Point(542, 66);
+            this.BeginOrderRating.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            this.BeginOrderRating.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
+            this.BeginOrderRating.Name = "BeginOrderRating";
+            this.BeginOrderRating.Size = new System.Drawing.Size(114, 23);
+            this.BeginOrderRating.TabIndex = 37;
+            this.BeginOrderRating.Value = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            // 
+            // label22
+            // 
+            this.label22.BackColor = System.Drawing.Color.Khaki;
+            this.label22.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label22.Location = new System.Drawing.Point(542, 37);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(235, 23);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "Период выборки";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label21
+            // 
+            this.label21.BackColor = System.Drawing.Color.Khaki;
+            this.label21.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.Location = new System.Drawing.Point(451, 37);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(85, 23);
+            this.label21.TabIndex = 35;
+            this.label21.Text = "Предмет";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.BackColor = System.Drawing.Color.LightSalmon;
+            this.label18.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label18.Location = new System.Drawing.Point(451, 5);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(326, 29);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "Успеваемость";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LessonRatingTable
+            // 
+            this.LessonRatingTable.AllowUserToDeleteRows = false;
+            this.LessonRatingTable.AllowUserToResizeColumns = false;
+            this.LessonRatingTable.AllowUserToResizeRows = false;
+            this.LessonRatingTable.BackgroundColor = System.Drawing.Color.Moccasin;
+            this.LessonRatingTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.LessonRatingTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.LessonRatingTable.ColumnHeadersHeight = 25;
+            this.LessonRatingTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.LessonRatingTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.NavajoWhite;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Gold;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.LessonRatingTable.DefaultCellStyle = dataGridViewCellStyle7;
+            this.LessonRatingTable.EnableHeadersVisualStyles = false;
+            this.LessonRatingTable.Location = new System.Drawing.Point(124, 37);
+            this.LessonRatingTable.Name = "LessonRatingTable";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.LessonRatingTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.LessonRatingTable.RowHeadersVisible = false;
+            this.LessonRatingTable.RowHeadersWidth = 4;
+            this.LessonRatingTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.LessonRatingTable.RowTemplate.Height = 27;
+            this.LessonRatingTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LessonRatingTable.Size = new System.Drawing.Size(321, 85);
+            this.LessonRatingTable.TabIndex = 33;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Предмет";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Задание";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Оценка";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Комментарий";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 108;
+            // 
+            // OpenRatingLesson
+            // 
+            this.OpenRatingLesson.BackColor = System.Drawing.Color.GreenYellow;
+            this.OpenRatingLesson.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.OpenRatingLesson.Location = new System.Drawing.Point(2, 95);
+            this.OpenRatingLesson.Name = "OpenRatingLesson";
+            this.OpenRatingLesson.Size = new System.Drawing.Size(116, 27);
+            this.OpenRatingLesson.TabIndex = 32;
+            this.OpenRatingLesson.Text = "Загрузить";
+            this.OpenRatingLesson.UseVisualStyleBackColor = false;
+            this.OpenRatingLesson.Click += new System.EventHandler(this.OpenRatingLesson_Click);
+            // 
+            // label27
+            // 
+            this.label27.BackColor = System.Drawing.Color.Khaki;
+            this.label27.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label27.Location = new System.Drawing.Point(3, 37);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(116, 23);
+            this.label27.TabIndex = 28;
+            this.label27.Text = "Дата";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dateLesson
+            // 
+            this.dateLesson.Location = new System.Drawing.Point(3, 66);
+            this.dateLesson.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            this.dateLesson.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
+            this.dateLesson.Name = "dateLesson";
+            this.dateLesson.Size = new System.Drawing.Size(116, 23);
+            this.dateLesson.TabIndex = 27;
+            this.dateLesson.Value = new System.DateTime(2022, 4, 20, 23, 51, 11, 0);
+            // 
+            // label19
+            // 
+            this.label19.BackColor = System.Drawing.Color.LightSalmon;
+            this.label19.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(3, 5);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(442, 29);
+            this.label19.TabIndex = 25;
+            this.label19.Text = "История уроков";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.BackColor = System.Drawing.Color.Yellow;
+            this.label17.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(-4, 252);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(798, 27);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Уроки и оценки";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label20
             // 
             this.label20.BackColor = System.Drawing.Color.Yellow;
             this.label20.Font = new System.Drawing.Font("Rockwell Extra Bold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label20.Location = new System.Drawing.Point(0, 0);
+            this.label20.Location = new System.Drawing.Point(-4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(796, 34);
+            this.label20.Size = new System.Drawing.Size(800, 26);
             this.label20.TabIndex = 9;
             this.label20.Text = "Расписание занятий";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -548,14 +807,14 @@
             this.timeTable.AllowUserToResizeRows = false;
             this.timeTable.BackgroundColor = System.Drawing.Color.Moccasin;
             this.timeTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.timeTable.ColumnHeadersHeight = 32;
             this.timeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.timeTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -568,23 +827,23 @@
             this.Thursday,
             this.Friday,
             this.Saturday});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.NavajoWhite;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gold;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.timeTable.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.NavajoWhite;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Gold;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.timeTable.DefaultCellStyle = dataGridViewCellStyle10;
             this.timeTable.EnableHeadersVisualStyles = false;
-            this.timeTable.Location = new System.Drawing.Point(3, 37);
+            this.timeTable.Location = new System.Drawing.Point(3, 29);
             this.timeTable.Name = "timeTable";
             this.timeTable.RowHeadersVisible = false;
             this.timeTable.RowHeadersWidth = 4;
             this.timeTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.timeTable.RowTemplate.Height = 27;
             this.timeTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.timeTable.Size = new System.Drawing.Size(786, 225);
+            this.timeTable.Size = new System.Drawing.Size(786, 233);
             this.timeTable.TabIndex = 8;
             // 
             // Number
@@ -643,15 +902,6 @@
             this.Saturday.Name = "Saturday";
             this.Saturday.Width = 108;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(792, 422);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Дневник";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // StudentPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -671,6 +921,9 @@
             this.FirstInfo.ResumeLayout(false);
             this.FirstInfo.PerformLayout();
             this.TimeTablePage.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LessonRatingTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeTable)).EndInit();
             this.ResumeLayout(false);
 
@@ -726,6 +979,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Friday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saturday;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.DateTimePicker dateLesson;
+        private System.Windows.Forms.DataGridView LessonRatingTable;
+        private System.Windows.Forms.Button OpenRatingLesson;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DateTimePicker EndOrderRating;
+        private System.Windows.Forms.DateTimePicker BeginOrderRating;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox SubjectAverage;
+        private System.Windows.Forms.Button ExportRatingToExcel;
+        private System.Windows.Forms.Button Average;
     }
 }

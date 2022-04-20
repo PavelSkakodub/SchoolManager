@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
@@ -137,6 +137,9 @@
             this.SendEmail = new System.Windows.Forms.Button();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ExportRatingToExcel = new System.Windows.Forms.Button();
+            this.emailRating = new System.Windows.Forms.TextBox();
+            this.BeginOrderRating = new System.Windows.Forms.DateTimePicker();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -168,6 +171,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.panel1.Controls.Add(this.BeginOrderRating);
+            this.panel1.Controls.Add(this.emailRating);
+            this.panel1.Controls.Add(this.ExportRatingToExcel);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.deleteEmail);
@@ -972,14 +978,14 @@
             this.timeTable.AllowUserToResizeRows = false;
             this.timeTable.BackgroundColor = System.Drawing.Color.Moccasin;
             this.timeTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Impact", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.timeTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.timeTable.ColumnHeadersHeight = 32;
             this.timeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.timeTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -992,14 +998,14 @@
             this.Thursday,
             this.Friday,
             this.Saturday});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.NavajoWhite;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gold;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Blue;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.timeTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.NavajoWhite;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Gold;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Blue;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.timeTable.DefaultCellStyle = dataGridViewCellStyle8;
             this.timeTable.EnableHeadersVisualStyles = false;
             this.timeTable.Location = new System.Drawing.Point(9, 72);
             this.timeTable.Name = "timeTable";
@@ -1379,6 +1385,37 @@
             // 
             this.FileDialog.FileName = "openFileDialog1";
             // 
+            // ExportRatingToExcel
+            // 
+            this.ExportRatingToExcel.BackColor = System.Drawing.Color.LightGreen;
+            this.ExportRatingToExcel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExportRatingToExcel.Location = new System.Drawing.Point(195, 224);
+            this.ExportRatingToExcel.Name = "ExportRatingToExcel";
+            this.ExportRatingToExcel.Size = new System.Drawing.Size(180, 29);
+            this.ExportRatingToExcel.TabIndex = 42;
+            this.ExportRatingToExcel.Text = "Выгрузить в Excel";
+            this.ExportRatingToExcel.UseVisualStyleBackColor = false;
+            this.ExportRatingToExcel.Click += new System.EventHandler(this.ExportRatingToExcel_Click);
+            // 
+            // emailRating
+            // 
+            this.emailRating.Location = new System.Drawing.Point(195, 169);
+            this.emailRating.Name = "emailRating";
+            this.emailRating.PlaceholderText = "Email ученика";
+            this.emailRating.Size = new System.Drawing.Size(180, 23);
+            this.emailRating.TabIndex = 43;
+            this.emailRating.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // BeginOrderRating
+            // 
+            this.BeginOrderRating.Location = new System.Drawing.Point(195, 195);
+            this.BeginOrderRating.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            this.BeginOrderRating.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
+            this.BeginOrderRating.Name = "BeginOrderRating";
+            this.BeginOrderRating.Size = new System.Drawing.Size(180, 23);
+            this.BeginOrderRating.TabIndex = 44;
+            this.BeginOrderRating.Value = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1524,5 +1561,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Thursday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Friday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saturday;
+        private System.Windows.Forms.TextBox emailRating;
+        private System.Windows.Forms.Button ExportRatingToExcel;
+        private System.Windows.Forms.DateTimePicker BeginOrderRating;
     }
 }

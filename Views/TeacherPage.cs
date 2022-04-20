@@ -1,11 +1,6 @@
 ﻿using EF_School_DB_Managment.Controllers;
 using EF_School_DB_Managment.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EF_School_DB_Managment.Views
@@ -126,19 +121,19 @@ namespace EF_School_DB_Managment.Views
                 //получаем ученика по емейлу
                 var student = await manager.GetStudentAsync(emailStudent.Text);
                 //проверка на сущ-и ученика
-                if (student != null) 
+                if (student != null)
                 {
                     //добавляем оценку с предметом тек.учителя
-                    await manager.SetRateStudentAsync(student.Email, new Rating()
+                    if (await manager.SetRateStudentAsync(student.Email, new Rating()
                     {
                         Subject = User.BaseTeacher.Subject,
-                        Rate = (sbyte)rate.Value, 
+                        Rate = (sbyte)rate.Value,
                         Comment = comment.Text,
                         Date = dateWork.Value,
-                    });
-                    MessageBox.Show("Оценка успешно выставлена", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    })) MessageBox.Show("Оценка успешно выставлена", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("В этот день нету урока. Проверьте дату или создайте урок", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else MessageBox.Show("Такого ученика не существует", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else MessageBox.Show("Такого ученика не существует", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else MessageBox.Show("Данные введены некорректно, дата не должна быть больше сег. дня", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -155,8 +150,9 @@ namespace EF_School_DB_Managment.Views
                 if (@class != null)
                 {
                     //добавляем оценку с предметом тек.учителя
-                    await manager.SetRateClassAsync(@class.Id, User.BaseTeacher.Subject, (sbyte)rate.Value, dateWork.Value, comment.Text);
-                    MessageBox.Show("Оценка всем ученикам успешно выставлена", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (await manager.SetRateClassAsync(@class.Id, User.BaseTeacher.Subject, (sbyte)rate.Value, dateWork.Value, comment.Text))
+                        MessageBox.Show("Оценка всем ученикам успешно выставлена", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else MessageBox.Show("В этот день нету урока. Проверьте дату или создайте урок", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                else MessageBox.Show("Такого класса не существует", "Выставление оценки", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

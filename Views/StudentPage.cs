@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -129,5 +130,62 @@ namespace EF_School_DB_Managment.Views
             nameSchool.Enabled = !nameSchool.Enabled;
         }
 
+        //загрузка уроков и оценок
+        private async void OpenRatingLesson_Click(object sender, EventArgs e)
+        {
+            //получаем список уроков за дату
+            var lessons = await manager.GetLessonByDateAsync(User.Class.Id, dateLesson.Value);
+            //проверка на сущ-ие уроков в этот день
+            if (lessons.Count != 0)
+            {
+                //очищаем таблицу
+                LessonRatingTable.Rows.Clear();               
+                //получаем список оценок за дату
+                var ratings = await manager.GetRatingsByDateAsync(User.Id, dateLesson.Value);
+                //заполняем таблицу
+                for (int i = 0; i < lessons.Count; i++)
+                {
+                    LessonRatingTable.Rows.Add();
+                    LessonRatingTable.Rows[i].Cells[0].Value = lessons[i].Subject;
+                    LessonRatingTable.Rows[i].Cells[1].Value = lessons[i].HomeWork;
+                    //получаем оценку по предмету данного урока
+                    var rate = ratings.Where(x => x.Subject == lessons[i].Subject);
+                    //перебираем оценки и комменты (может быть несколько)
+                    foreach (var r in rate)
+                    {
+                        LessonRatingTable.Rows[i].Cells[2].Value += r.Rate + " ";
+                        LessonRatingTable.Rows[i].Cells[3].Value += r.Comment + " ";
+                    }
+                }
+                //запрет на редактирование таблицы
+                LessonRatingTable.ReadOnly = true;
+            }
+            else MessageBox.Show("Урока за указанную дату нету", "История уроков", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        //средняя оценка за период по предмету
+        private async void Average_Click(object sender, EventArgs e)
+        {
+            //проверка введенных дат
+            if (BeginOrderRating.Value.Date <= EndOrderRating.Value.Date && SubjectAverage.Text.Trim().Length != 0)
+            {
+                try
+                {
+                    //получаем ср.значение по датам
+                    float average = await manager.GetAverageBySubjectAsync(User.Id, SubjectAverage.Text, BeginOrderRating.Value, EndOrderRating.Value);
+                    MessageBox.Show($"Предмет: {SubjectAverage.Text}\nСреднее значение: {average}\nДиапазон дат: от {BeginOrderRating.Value:d} до {EndOrderRating.Value:d}", "Средняя оценка по предмету", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch
+                {
+                    MessageBox.Show("Данные заполнены некорректно. Проверьте даты и существование предмета", "Средняя оценка по предмету", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                
+            } 
+        }
+
+        //экспорт оценок в эксель
+        private void ExportRatingToExcel_Click(object sender, EventArgs e)
+        {            
+            manager.ExportRatingToExcelAsync(User.Id, BeginOrderRating.Value, EndOrderRating.Value);
+        }
     }
 }

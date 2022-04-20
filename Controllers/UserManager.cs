@@ -91,7 +91,6 @@ namespace EF_School_DB_Managment.Controllers
                 .Include(x => x.BaseStudent)
                 .Include(x => x.Class)
                 .Include(x => x.Class.TimeTable)
-                .Include(x => x.Class.Lessons)
                 .FirstOrDefaultAsync(x => x.Email == email);
             //возвращаем юзера
             return user;
@@ -139,6 +138,80 @@ namespace EF_School_DB_Managment.Controllers
             {
                 return false;
             }
+        }
+
+        //получаем список уроков за указ-ую дату
+        public async Task<List<Lesson>> GetLessonByDateAsync(int id, DateTime date)
+        {
+            //используем контекст БД 
+            using var context = new SchoolDbContext();
+            //получаем список уроков за указ-ую дату в указ-ом классе
+            var lessons = await context.Lessons
+                .Where(x => x.Date.Date == date && x.ClassId == id)
+                .OrderBy(x => x.Subject)
+                .ToListAsync();
+            //возвращаем список уроков
+            return lessons;
+        }
+
+        //получение списка оценок за указ-ую дату
+        public async Task<List<Rating>> GetRatingsByDateAsync(int id, DateTime date)
+        {
+            //используем контекст БД 
+            using var context = new SchoolDbContext();
+            //получаем список уроков за указ-ую дату в указ-ом классе
+            var ratings = await context.Ratings.Where(x => x.Date.Date == date && x.StudentId == id).ToListAsync();               
+            //возвращаем список оценок
+            return ratings;
+        }
+
+        //получение средней оценки по предмету
+        public async Task<float> GetAverageBySubjectAsync(int id, string subject, DateTime begin, DateTime end)
+        {
+            //используем контекст БД 
+            using var context = new SchoolDbContext();
+            //делаем выборку по студенту и предмету в указ-ом диапазоне дат и возвращаем ср.значение
+            var avg = await context.Ratings
+                .Where(x => x.StudentId == id && x.Subject == subject && x.Date.Date >= begin.Date && x.Date.Date <= end.Date)
+                .AverageAsync(x => x.Rate);
+            return (float)avg;
+        }
+
+        //экспорт успеваемости ученика в эксель
+        public async void ExportRatingToExcelAsync(int id, DateTime begin, DateTime end)
+        {
+            //используем контекст БД 
+            using var context = new SchoolDbContext();
+            //получаем список оценок в диапазоне дат
+            var ratings = await context.Ratings
+                .Where(x => x.Date.Date >= begin && x.Date.Date <= end && x.StudentId == id)
+                .OrderByDescending(x => x.Date)
+                .ToListAsync();
+
+            await Task.Run(() =>
+            {
+                //получаем текущий лист эксель
+                var sheet = Admin.ExcelSettings("Успеваемость", ratings.Count);
+                sheet.Cells[1, 1] = "Дата урока";
+                sheet.Cells[1, 2] = "Предмет";
+                sheet.Cells[1, 3] = "Оценка";
+                sheet.Cells[1, 4] = "Комментарий";
+                //выводим все значения
+                for (int i = 0; i < ratings.Count; i++)
+                {
+                    sheet.Cells[i + 2, 1] = ratings[i].Date.Date.ToString("d");
+                    sheet.Cells[i + 2, 2] = ratings[i].Subject;
+                    sheet.Cells[i + 2, 3] = ratings[i].Rate.ToString();
+                    sheet.Cells[i + 2, 4] = ratings[i].Comment;
+                }
+
+                //жирный формат для строки (заголовков)
+                sheet.get_Range("A1", $"F1").Font.Bold = true;
+                //получаем диапазон сначала до последней записи списка
+                Microsoft.Office.Interop.Excel.Range oRng = sheet.get_Range("A1", $"F{ratings.Count + 1}");
+                //делаем ячейки по размеру содержимого
+                oRng.EntireColumn.AutoFit();
+            });
         }
         #endregion
 
@@ -201,35 +274,51 @@ namespace EF_School_DB_Managment.Controllers
         }
         
         //добавление оценки ученику
-        public async Task SetRateStudentAsync(string email, Rating rate)
+        public async Task<bool> SetRateStudentAsync(string email, Rating rate)
         {
             //используем контекст БД
             using var context = new SchoolDbContext();
             //получаем ученика с оценками
             var student = await context.Students.Include(x => x.Ratings).FirstOrDefaultAsync(x => x.Email == email);
-            //добавляем оценку
-            student.Ratings.Add(rate);
-            //сохраняем изменения
-            await context.SaveChangesAsync();
+            //ищем урок с такой же датой и предметом что у оценки
+            var lesson = context.Lessons.Where(x => x.ClassId == student.ClassId).FirstOrDefault(x => x.Date.Date == rate.Date && x.Subject == rate.Subject);
+            //если урок сущ-ует, можно поставить за него оценку
+            if (lesson != null)
+            {
+                //добавляем оценку
+                student.Ratings.Add(rate);
+                //сохраняем изменения
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else return false;
         }
 
         //добавление оценки ученику (нельзя передать сразу объект т.к Id будет один-ым)
-        public async Task SetRateClassAsync(int id, string subject, sbyte rate, DateTime date, string comment)
+        public async Task<bool> SetRateClassAsync(int id, string subject, sbyte rate, DateTime date, string comment)
         {
             //используем контекст БД
             using var context = new SchoolDbContext();
             //получаем учеников из класса
             var students = await context.Students.Include(x => x.Ratings).Where(x => x.ClassId == id).ToListAsync(); ;
-            //добавляем всем оценку новую
-            foreach (var s in students) s.Ratings.Add(new Rating()
+            //ищем урок с такой же датой и предметом что у оценки
+            var lesson = context.Lessons.Where(x => x.ClassId == id).FirstOrDefault(x => x.Date.Date == date.Date && x.Subject == subject);
+            //если в этот день есть урок
+            if (lesson != null)
             {
-                Subject = subject,
-                Rate = rate,
-                Comment = comment,
-                Date = date,
-            });
-            //сохраняем изменения
-            await context.SaveChangesAsync();
+                //добавляем всем оценку новую
+                foreach (var s in students) s.Ratings.Add(new Rating()
+                {
+                    Subject = subject,
+                    Rate = rate,
+                    Comment = comment,
+                    Date = date,
+                });
+                //сохраняем изменения
+                await context.SaveChangesAsync();
+                return true;
+            }
+            else return false;
         }
 
         //создание урока

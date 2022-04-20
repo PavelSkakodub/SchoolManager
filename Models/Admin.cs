@@ -333,7 +333,7 @@ namespace EF_School_DB_Managment.Models
         }
 
         //настройка эксель для вставки значений
-        private Excel._Worksheet ExcelSettings(string name, int count)
+        public static Excel._Worksheet ExcelSettings(string name, int count)
         {
             Excel.Application app; //приложение
             Excel._Workbook book; //книга
