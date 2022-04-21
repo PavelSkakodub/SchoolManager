@@ -2,12 +2,6 @@
 using EF_School_DB_Managment.Models;
 using EF_School_DB_Managment.Views;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EF_School_DB_Managment
@@ -60,37 +54,52 @@ namespace EF_School_DB_Managment
                         //добавляем юзера в БД исходя из его кода(тоже что и роль)
                         switch (int.Parse(CodeRegistration.Text))
                         {
-                            case 123:
-                                //инициализируем объект ученика и создаём пустые связи
-                                Student student = new Student() { BaseStudent = new BaseStudent() };
-                                SetUserData(student);
-                                //добавляем юзера в БД
-                                await manager.CreateUserAsync(student);
-                                //открываем форму с данными ученика
-                                StudentPage spage = new StudentPage(student);
-                                spage.ShowDialog();
+                            case StudentCode:
+                                if (UserRole.SelectedItem.ToString() == "Ученик")
+                                {
+                                    //инициализируем объект ученика и создаём пустые связи
+                                    Student student = new Student() { BaseStudent = new BaseStudent() };
+                                    SetUserData(student);
+                                    //добавляем юзера в БД
+                                    await manager.CreateUserAsync(student);
+                                    //открываем форму с данными ученика
+                                    StudentPage spage = new StudentPage(student);
+                                    Hide(); //скрываем эту форму
+                                    spage.ShowDialog();
+                                }
+                                else MessageBox.Show("Код регистрации отличается от выбранной роли", "Регистрация ученика", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 break;
 
-                            case 456:
-                                //инициализируем объект учителя и создаём пустые связи
-                                Teacher teacher = new Teacher() { BaseTeacher = new BaseTeacher() };
-                                SetUserData(teacher);
-                                //добавляем юзера в БД
-                                await manager.CreateUserAsync(teacher);
-                                //открываем форму с данными учителя
-                                TeacherPage tpage = new TeacherPage(teacher);
-                                tpage.ShowDialog();
+                            case TeacherCode:
+                                if (UserRole.SelectedItem.ToString() == "Учитель") 
+                                {
+                                    //инициализируем объект учителя и создаём пустые связи
+                                    Teacher teacher = new Teacher() { BaseTeacher = new BaseTeacher() };
+                                    SetUserData(teacher);
+                                    //добавляем юзера в БД
+                                    await manager.CreateUserAsync(teacher);
+                                    //открываем форму с данными учителя
+                                    TeacherPage tpage = new TeacherPage(teacher);
+                                    Hide(); //скрываем эту форму
+                                    tpage.ShowDialog();
+                                }
+                                else MessageBox.Show("Код регистрации отличается от выбранной роли", "Регистрация учителя", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 break;
 
-                            case 789:
-                                //инициализируем объект учителя и создаём пустые связи
-                                Admin admin = new Admin();
-                                SetUserData(admin);
-                                //добавляем юзера в БД
-                                await manager.CreateUserAsync(admin);
-                                //открываем форму с данными админа
-                                AdminPage apage = new AdminPage(admin);
-                                apage.ShowDialog();
+                            case AdminCode:
+                                if (UserRole.SelectedItem.ToString() == "Админ")
+                                {
+                                    //инициализируем объект учителя и создаём пустые связи
+                                    Admin admin = new Admin();
+                                    SetUserData(admin);
+                                    //добавляем юзера в БД
+                                    await manager.CreateUserAsync(admin);
+                                    //открываем форму с данными админа
+                                    AdminPage apage = new AdminPage(admin);
+                                    Hide(); //скрываем эту форму
+                                    apage.ShowDialog();
+                                }
+                                else MessageBox.Show("Код регистрации отличается от выбранной роли", "Регистрация админа", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 break;
                         }
                     }
@@ -122,24 +131,24 @@ namespace EF_School_DB_Managment
                         //получаем авториз-го ученика и переходим в его форму
                         var student = await manager.GetStudentAsync(login_log.Text);
                         StudentPage spage = new StudentPage(student);
-                        spage.ShowDialog();
                         Hide(); //скрываем эту форму
+                        spage.ShowDialog();                       
                         break;
 
                     case "Teacher":
                         //получаем авториз-го учителя и переходим в его форму
                         var teacher = await manager.GetTeacherAsync(login_log.Text);
                         TeacherPage tpage = new TeacherPage(teacher);
-                        tpage.ShowDialog();
                         Hide(); //скрываем эту форму
+                        tpage.ShowDialog();
                         break;
 
                     case "Admin":
                         //получаем авториз-го админа и переходим в его форму
                         var admin = await manager.GetAdminAsync(login_log.Text);
                         AdminPage apage = new AdminPage(admin);
-                        apage.ShowDialog(); 
                         Hide(); //скрываем эту форму
+                        apage.ShowDialog(); 
                         break;
 
                     default:
@@ -225,6 +234,7 @@ namespace EF_School_DB_Managment
                 "> Телефон - максимум 20 символов", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        //начальная загрузка БД (делаем первый запрос - дальше быстрее)
         private async void HomePage_Load(object sender, EventArgs e)
         {
             var d = await manager.GetTeacherAllAsync("");

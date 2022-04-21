@@ -129,7 +129,9 @@ namespace EF_School_DB_Managment.Controllers
         {
             //настройки модели с пом-ю FluentApi
             public void Configure(EntityTypeBuilder<Lesson> builder)
-            {                    
+            {
+                //составной индекс по дате и айди класса
+                builder.HasIndex(x => new { x.ClassId, x.Date });
                 //макс.длина + знач. по умолчанию
                 builder.Property(x => x.Subject).HasMaxLength(25).HasDefaultValue("");
                 builder.Property(x => x.HomeWork).HasMaxLength(200).HasDefaultValue("");
@@ -144,12 +146,12 @@ namespace EF_School_DB_Managment.Controllers
             //настройки модели с пом-ю FluentApi
             public void Configure(EntityTypeBuilder<Rating> builder)
             {
+                //составной индекс по дате и айди ученика
+                builder.HasIndex(x => new { x.StudentId, x.Date });
                 //макс.длина + знач. по умолчанию
                 builder.Property(x => x.Subject).HasMaxLength(25).HasDefaultValue("");
                 builder.Property(x => x.Comment).HasMaxLength(200).HasDefaultValue("");
                 builder.Property(x => x.Rate).HasMaxLength(13).HasDefaultValue(0);
-                //тип только дата
-                builder.Property(x => x.Date).HasColumnType("date");
                 //тип только дата
                 builder.Property(x => x.Date).HasColumnType("date");
             }
@@ -180,6 +182,8 @@ namespace EF_School_DB_Managment.Controllers
         {
             public void Configure(EntityTypeBuilder<TimeTable> builder)
             {
+                //индекс по колонке дни недели
+                builder.HasIndex(x => x.DayOfWeek);
                 //макс.длина + знач. по умолчанию
                 builder.Property(x => x.NumberLesson).HasMaxLength(8).HasDefaultValue(0);
                 builder.Property(x => x.DayOfWeek).HasMaxLength(7).HasDefaultValue(0);
