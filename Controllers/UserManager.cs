@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,35 @@ namespace EF_School_DB_Managment.Controllers
         public UserManager() { }
 
         #region Authorization
+
+        //метод для проверки пароля (сравнение с хэшем)
+        private bool VerifyHashedPassword(string hashedPassword, string password)
+        {
+            byte[] buffer1, buffer2, src, dst;
+
+            if (hashedPassword == null || password == null)
+            {
+                return false;
+            }
+
+            src = Convert.FromBase64String(hashedPassword);
+            if ((src.Length != 0x31) || (src[0] != 0))
+            {
+                return false;
+            }
+
+            dst = new byte[0x10];
+            Buffer.BlockCopy(src, 1, dst, 0, 0x10);
+            buffer2 = new byte[0x20];
+            Buffer.BlockCopy(src, 0x11, buffer2, 0, 0x20);
+
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, dst, 0x3e8))
+            {
+                buffer1 = bytes.GetBytes(0x20);
+            }
+
+            return buffer2.SequenceEqual(buffer1);
+        }
 
         //добавление юзера в БД
         public async Task CreateUserAsync(object user)
@@ -61,7 +91,7 @@ namespace EF_School_DB_Managment.Controllers
             var user = (User)await GetUserByEmailAsync(email);
 
             //проверяем хеш юзера и возвращаем роль юзера (название класса) - иначе нулл
-            if (user != null && Helper.VerifyHashedPassword(user.HashPassword, password))
+            if (user != null && VerifyHashedPassword(user.HashPassword, password))
                 return user.GetType().Name;
             else
                 return null;
@@ -105,6 +135,7 @@ namespace EF_School_DB_Managment.Controllers
             var user = await context.Students
                 .Include(x => x.BaseStudent)
                 .Include(x => x.Class)
+                .AsNoTracking()
                 .ToListAsync();
                 
             //возвращаем список
@@ -149,6 +180,7 @@ namespace EF_School_DB_Managment.Controllers
             var lessons = await context.Lessons
                 .Where(x => x.Date.Date == date && x.ClassId == id)
                 .OrderBy(x => x.Subject)
+                .AsNoTracking()
                 .ToListAsync();
             //возвращаем список уроков
             return lessons;
@@ -160,7 +192,10 @@ namespace EF_School_DB_Managment.Controllers
             //используем контекст БД 
             using var context = new SchoolDbContext();
             //получаем список уроков за указ-ую дату в указ-ом классе
-            var ratings = await context.Ratings.Where(x => x.Date.Date == date && x.StudentId == id).ToListAsync();               
+            var ratings = await context.Ratings
+                .Where(x => x.Date.Date == date && x.StudentId == id)
+                .AsNoTracking()
+                .ToListAsync();               
             //возвращаем список оценок
             return ratings;
         }
@@ -173,7 +208,9 @@ namespace EF_School_DB_Managment.Controllers
             //делаем выборку по студенту и предмету в указ-ом диапазоне дат и возвращаем ср.значение
             var avg = await context.Ratings
                 .Where(x => x.StudentId == id && x.Subject == subject && x.Date.Date >= begin.Date && x.Date.Date <= end.Date)
+                .AsNoTracking()
                 .AverageAsync(x => x.Rate);
+            //возвращаем ср.значение
             return (float)avg;
         }
 
@@ -185,6 +222,7 @@ namespace EF_School_DB_Managment.Controllers
             //получаем список оценок в диапазоне дат
             var ratings = await context.Ratings
                 .Where(x => x.Date.Date >= begin && x.Date.Date <= end && x.StudentId == id)
+                .AsNoTracking()
                 .OrderByDescending(x => x.Date)
                 .ToListAsync();
 
@@ -362,7 +400,7 @@ namespace EF_School_DB_Managment.Controllers
         public async Task<Admin> GetAdminAsync(string email)
         {
             using var context = new SchoolDbContext(); //исп-уем контекст БД
-            var user = await context.Admins.FirstOrDefaultAsync(x => x.Email == email); //ищем юзера по емейлу
+            var user = await context.Admins.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email); //ищем юзера по емейлу
             return user; //возвращаем найденного юзера или нулл
         }
 
@@ -378,28 +416,16 @@ namespace EF_School_DB_Managment.Controllers
             return @class;
         }
 
-        //получение класса по имени
-        public async Task<Class> GetClassAllAsync(string name)
-        {
-            //используем контекст БД
-            using var context = new SchoolDbContext();
-            //получаем класс с связанными данными
-            var @class = await context.Classes
-                .Include(x => x.Students)
-                .Include(x => x.Teacher)
-                .Include(x => x.TimeTable)
-                .FirstOrDefaultAsync(x => x.Name == name);
-            //возвращаем найденный клас или нулл
-            return @class;
-        }
-
         //получение класса с расписанием
         public async Task<Class> GetClassTimeTableAsync(string name)
         {
             //используем контекст БД
             var context = new SchoolDbContext();
             //получаем класс с его расписанием
-            var @class = await context.Classes.Include(x => x.TimeTable).FirstOrDefaultAsync(x => x.Name == name);
+            var @class = await context.Classes
+                .Include(x => x.TimeTable)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Name == name);
             //возвращаем найденный клас или нулл
             return @class;
         }
