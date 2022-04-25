@@ -1,6 +1,7 @@
 ﻿using EF_School_DB_Managment.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Logging;
 
 namespace EF_School_DB_Managment.Controllers
 {
@@ -17,10 +18,11 @@ namespace EF_School_DB_Managment.Controllers
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<TimeTable> TimeTables { get; set; }
 
-        //настройки приложения (строка подключения в д.случае)
+        //настройки приложения (строка подключения в д.случае и использование логирования)
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=SchoolDatabase;Trusted_Connection=true");
+            options.LogTo(message => System.Diagnostics.Debug.WriteLine(message), LogLevel.Trace);
         }
 
         //настройки моделей

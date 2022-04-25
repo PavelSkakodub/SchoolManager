@@ -440,7 +440,6 @@
             this.MaximumSize = new System.Drawing.Size(613, 379);
             this.Name = "HomePage";
             this.Text = "Home";
-            this.Load += new System.EventHandler(this.HomePage_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

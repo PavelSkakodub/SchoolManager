@@ -266,12 +266,5 @@ namespace EF_School_DB_Managment
                 "> Емейл - максимум 40 символов\n" +
                 "> Телефон - максимум 20 символов", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        //начальная загрузка БД (делаем первый запрос - дальше быстрее)
-        private async void HomePage_Load(object sender, EventArgs e)
-        {
-            var d = await manager.GetTeacherAllAsync("");
-            var s = await manager.GetStudentAllAsync("");
-        }
     }
 }

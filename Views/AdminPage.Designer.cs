@@ -32,22 +32,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BeginOrderRating = new System.Windows.Forms.DateTimePicker();
-            this.emailRating = new System.Windows.Forms.TextBox();
-            this.ExportRatingToExcel = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.deleteEmail = new System.Windows.Forms.TextBox();
             this.DeleteStudent = new System.Windows.Forms.Button();
-            this.downloadToExcel = new System.Windows.Forms.Button();
-            this.findName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.checkClass = new System.Windows.Forms.Button();
             this.classNameAdd = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.emailAddClass = new System.Windows.Forms.TextBox();
             this.SetStudentsClass = new System.Windows.Forms.Button();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.ExportRatingToExcel = new System.Windows.Forms.Button();
+            this.BeginOrderRating = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.emailRating = new System.Windows.Forms.TextBox();
+            this.findName = new System.Windows.Forms.TextBox();
+            this.checkClass = new System.Windows.Forms.Button();
+            this.downloadToExcel = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.ExportClassToExcel = new System.Windows.Forms.Button();
@@ -140,10 +142,9 @@
             this.SendEmail = new System.Windows.Forms.Button();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.panel13 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel13.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -155,7 +156,6 @@
             this.panel9.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel10.SuspendLayout();
-            this.panel13.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -189,52 +189,10 @@
             this.panel1.Size = new System.Drawing.Size(383, 274);
             this.panel1.TabIndex = 0;
             // 
-            // BeginOrderRating
-            // 
-            this.BeginOrderRating.Location = new System.Drawing.Point(3, 147);
-            this.BeginOrderRating.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
-            this.BeginOrderRating.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
-            this.BeginOrderRating.Name = "BeginOrderRating";
-            this.BeginOrderRating.Size = new System.Drawing.Size(174, 23);
-            this.BeginOrderRating.TabIndex = 44;
-            this.BeginOrderRating.Value = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
-            // 
-            // emailRating
-            // 
-            this.emailRating.Location = new System.Drawing.Point(3, 121);
-            this.emailRating.Name = "emailRating";
-            this.emailRating.PlaceholderText = "Email ученика";
-            this.emailRating.Size = new System.Drawing.Size(174, 23);
-            this.emailRating.TabIndex = 43;
-            this.emailRating.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ExportRatingToExcel
-            // 
-            this.ExportRatingToExcel.BackColor = System.Drawing.Color.LightGreen;
-            this.ExportRatingToExcel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ExportRatingToExcel.Location = new System.Drawing.Point(3, 175);
-            this.ExportRatingToExcel.Name = "ExportRatingToExcel";
-            this.ExportRatingToExcel.Size = new System.Drawing.Size(174, 29);
-            this.ExportRatingToExcel.TabIndex = 42;
-            this.ExportRatingToExcel.Text = "Выгрузить в Excel";
-            this.ExportRatingToExcel.UseVisualStyleBackColor = false;
-            this.ExportRatingToExcel.Click += new System.EventHandler(this.ExportRatingToExcel_Click);
-            // 
-            // label13
-            // 
-            this.label13.BackColor = System.Drawing.Color.LightSalmon;
-            this.label13.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(3, 94);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(174, 23);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "Успеваемость";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label12
             // 
             this.label12.BackColor = System.Drawing.Color.LightSalmon;
-            this.label12.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.Location = new System.Drawing.Point(12, 147);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(174, 23);
@@ -263,50 +221,6 @@
             this.DeleteStudent.UseVisualStyleBackColor = false;
             this.DeleteStudent.Click += new System.EventHandler(this.DeleteStudent_Click);
             // 
-            // downloadToExcel
-            // 
-            this.downloadToExcel.BackColor = System.Drawing.Color.PaleGreen;
-            this.downloadToExcel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.downloadToExcel.Location = new System.Drawing.Point(3, 58);
-            this.downloadToExcel.Name = "downloadToExcel";
-            this.downloadToExcel.Size = new System.Drawing.Size(174, 29);
-            this.downloadToExcel.TabIndex = 10;
-            this.downloadToExcel.Text = "Выгрузить в Excel ";
-            this.downloadToExcel.UseVisualStyleBackColor = false;
-            this.downloadToExcel.Click += new System.EventHandler(this.downloadToExcel_Click);
-            // 
-            // findName
-            // 
-            this.findName.Location = new System.Drawing.Point(3, 32);
-            this.findName.Name = "findName";
-            this.findName.PlaceholderText = "Email ученика";
-            this.findName.Size = new System.Drawing.Size(98, 23);
-            this.findName.TabIndex = 9;
-            this.findName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.LightSalmon;
-            this.label3.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(3, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 23);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Выгрузка и поиск";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // checkClass
-            // 
-            this.checkClass.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.checkClass.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkClass.Location = new System.Drawing.Point(106, 32);
-            this.checkClass.Name = "checkClass";
-            this.checkClass.Size = new System.Drawing.Size(71, 23);
-            this.checkClass.TabIndex = 7;
-            this.checkClass.Text = "Найти";
-            this.checkClass.UseVisualStyleBackColor = false;
-            this.checkClass.Click += new System.EventHandler(this.checkClass_Click);
-            // 
             // classNameAdd
             // 
             this.classNameAdd.Location = new System.Drawing.Point(132, 85);
@@ -319,7 +233,7 @@
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.LightSalmon;
-            this.label2.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Georgia", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(12, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 23);
@@ -358,6 +272,116 @@
             this.SetStudentsClass.Text = "Зачислить";
             this.SetStudentsClass.UseVisualStyleBackColor = false;
             this.SetStudentsClass.Click += new System.EventHandler(this.SetStudentsClass_Click);
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel12.Location = new System.Drawing.Point(9, 53);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(180, 207);
+            this.panel12.TabIndex = 45;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel13.Controls.Add(this.ExportRatingToExcel);
+            this.panel13.Controls.Add(this.BeginOrderRating);
+            this.panel13.Controls.Add(this.label13);
+            this.panel13.Controls.Add(this.label3);
+            this.panel13.Controls.Add(this.emailRating);
+            this.panel13.Controls.Add(this.findName);
+            this.panel13.Controls.Add(this.checkClass);
+            this.panel13.Controls.Add(this.downloadToExcel);
+            this.panel13.Location = new System.Drawing.Point(195, 53);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(180, 207);
+            this.panel13.TabIndex = 46;
+            // 
+            // ExportRatingToExcel
+            // 
+            this.ExportRatingToExcel.BackColor = System.Drawing.Color.LightGreen;
+            this.ExportRatingToExcel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExportRatingToExcel.Location = new System.Drawing.Point(3, 175);
+            this.ExportRatingToExcel.Name = "ExportRatingToExcel";
+            this.ExportRatingToExcel.Size = new System.Drawing.Size(174, 29);
+            this.ExportRatingToExcel.TabIndex = 42;
+            this.ExportRatingToExcel.Text = "Выгрузить в Excel";
+            this.ExportRatingToExcel.UseVisualStyleBackColor = false;
+            this.ExportRatingToExcel.Click += new System.EventHandler(this.ExportRatingToExcel_Click);
+            // 
+            // BeginOrderRating
+            // 
+            this.BeginOrderRating.Location = new System.Drawing.Point(3, 147);
+            this.BeginOrderRating.MaxDate = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            this.BeginOrderRating.MinDate = new System.DateTime(2000, 4, 19, 0, 0, 0, 0);
+            this.BeginOrderRating.Name = "BeginOrderRating";
+            this.BeginOrderRating.Size = new System.Drawing.Size(174, 23);
+            this.BeginOrderRating.TabIndex = 44;
+            this.BeginOrderRating.Value = new System.DateTime(2022, 4, 21, 0, 0, 0, 0);
+            // 
+            // label13
+            // 
+            this.label13.BackColor = System.Drawing.Color.LightSalmon;
+            this.label13.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(3, 94);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(174, 23);
+            this.label13.TabIndex = 14;
+            this.label13.Text = "Успеваемость";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.LightSalmon;
+            this.label3.Font = new System.Drawing.Font("Georgia", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(3, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(174, 23);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Выгрузка и поиск";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // emailRating
+            // 
+            this.emailRating.Location = new System.Drawing.Point(3, 121);
+            this.emailRating.Name = "emailRating";
+            this.emailRating.PlaceholderText = "Email ученика";
+            this.emailRating.Size = new System.Drawing.Size(174, 23);
+            this.emailRating.TabIndex = 43;
+            this.emailRating.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // findName
+            // 
+            this.findName.Location = new System.Drawing.Point(3, 32);
+            this.findName.Name = "findName";
+            this.findName.PlaceholderText = "Email ученика";
+            this.findName.Size = new System.Drawing.Size(98, 23);
+            this.findName.TabIndex = 9;
+            this.findName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // checkClass
+            // 
+            this.checkClass.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.checkClass.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.checkClass.Location = new System.Drawing.Point(106, 32);
+            this.checkClass.Name = "checkClass";
+            this.checkClass.Size = new System.Drawing.Size(71, 23);
+            this.checkClass.TabIndex = 7;
+            this.checkClass.Text = "Найти";
+            this.checkClass.UseVisualStyleBackColor = false;
+            this.checkClass.Click += new System.EventHandler(this.checkClass_Click);
+            // 
+            // downloadToExcel
+            // 
+            this.downloadToExcel.BackColor = System.Drawing.Color.PaleGreen;
+            this.downloadToExcel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.downloadToExcel.Location = new System.Drawing.Point(3, 58);
+            this.downloadToExcel.Name = "downloadToExcel";
+            this.downloadToExcel.Size = new System.Drawing.Size(174, 29);
+            this.downloadToExcel.TabIndex = 10;
+            this.downloadToExcel.Text = "Выгрузить в Excel ";
+            this.downloadToExcel.UseVisualStyleBackColor = false;
+            this.downloadToExcel.Click += new System.EventHandler(this.downloadToExcel_Click);
             // 
             // panel2
             // 
@@ -1266,7 +1290,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(371, 31);
             this.label25.TabIndex = 6;
-            this.label25.Text = "Ууведомления и конвертация";
+            this.label25.Text = "Уведомления и конвертация";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel10
@@ -1413,30 +1437,6 @@
             // 
             this.FileDialog.FileName = "openFileDialog1";
             // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel12.Location = new System.Drawing.Point(9, 53);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(180, 207);
-            this.panel12.TabIndex = 45;
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.DodgerBlue;
-            this.panel13.Controls.Add(this.ExportRatingToExcel);
-            this.panel13.Controls.Add(this.BeginOrderRating);
-            this.panel13.Controls.Add(this.label13);
-            this.panel13.Controls.Add(this.label3);
-            this.panel13.Controls.Add(this.emailRating);
-            this.panel13.Controls.Add(this.findName);
-            this.panel13.Controls.Add(this.checkClass);
-            this.panel13.Controls.Add(this.downloadToExcel);
-            this.panel13.Location = new System.Drawing.Point(195, 53);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(180, 207);
-            this.panel13.TabIndex = 46;
-            // 
             // AdminPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1451,6 +1451,8 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -1469,8 +1471,6 @@
             this.panel11.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
             this.ResumeLayout(false);
 
         }
